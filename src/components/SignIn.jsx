@@ -11,6 +11,7 @@ export function SignIn({ toogleForm }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    console.log("signin:", email, password);
     history.push("/");
   };
 
