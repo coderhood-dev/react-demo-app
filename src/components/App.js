@@ -1,16 +1,24 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Home, Profile, Header } from "./";
+import { Home, Profile, Header, SignIn, SignUp } from "./";
 
 export const App = () => {
+  const isAuthenticated = false;
   return (
     <Router>
-      <Header />
       <Switch>
-        <Route path="/" exact>
-          <Home />
+        <Route path="/signin">
+          <SignIn />
+        </Route>
+        <Route path="/signup">
+          <SignUp />
         </Route>
         <Route path="/profile">
+          <Header />
           <Profile />
+        </Route>
+        <Route path="/" exact>
+          <Header />
+          <Home />
         </Route>
       </Switch>
     </Router>
