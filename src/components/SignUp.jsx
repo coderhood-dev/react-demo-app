@@ -8,12 +8,16 @@ export function SignUp({ toogleForm }) {
   const [lastName, setLastName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [errors, setErrors] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
 
   const history = useHistory();
   const { signup } = useAuth();
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setErrors([]);
+    setLoading(true);
 
     const user = {
       firstName,
@@ -24,10 +28,14 @@ export function SignUp({ toogleForm }) {
 
     signup(user)
       .then(() => {
+        setErrors([]);
+        setLoading(false);
+
         history.push("/signin");
       })
       .catch((e) => {
-        console.log("errors", e);
+        setErrors(e);
+        setLoading(false);
       });
   };
 
@@ -69,10 +77,28 @@ export function SignUp({ toogleForm }) {
       />
       <Input onChange={handleEmailChange} mb="1rem" placeholder="Email" />
       <Input onChange={handlePasswordChange} mb="1rem" placeholder="Password" />
-      <Button colorScheme="blue" mt="20px" type="submit">
+      {errors.map((error, i) => (
+        <Text key={i} color="red.400">
+          {error}
+        </Text>
+      ))}
+      <Button
+        colorScheme="blue"
+        mt="20px"
+        type="submit"
+        disabled={loading}
+        isLoading={loading}
+      >
         Signup
       </Button>
-      <Button mt="1rem" colorScheme="blue" variant="ghost" onClick={toogleForm}>
+      <Button
+        mt="1rem"
+        colorScheme="blue"
+        variant="ghost"
+        onClick={() => {
+          history.push("/signin");
+        }}
+      >
         Already have an account? SignIn
       </Button>
     </Flex>

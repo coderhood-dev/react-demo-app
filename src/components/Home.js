@@ -34,7 +34,7 @@ export const Home = () => {
   return (
     <Flex direction="column" p="4rem">
       <Heading as="h1" mb="2rem">
-        Publicaciones recientes
+        Coderhood Social
       </Heading>
       {posts.map((post) => (
         <Flex
