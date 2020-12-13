@@ -1,8 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Home, Profile, SignIn, SignUp, Layout, ProtectedRoute } from "./";
+import { Home, Profile, SignIn, SignUp, Layout } from "./";
 import { UserContext } from "../context/user";
-import { useAuth, useLocalStorageState } from "../hooks";
 
 export const App = () => {
   const [user, setUser] = React.useState(null);
