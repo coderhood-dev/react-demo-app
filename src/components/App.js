@@ -1,22 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import {
-  Home,
-  Profile,
-  Header,
-  SignIn,
-  SignUp,
-  Layout,
-  ProtectedRoute,
-} from "./";
+import { Home, Profile, SignIn, SignUp, Layout, ProtectedRoute } from "./";
 import { UserContext } from "../context/user";
+import { useAuth, useLocalStorageState } from "../hooks";
 
 export const App = () => {
   const [user, setUser] = React.useState(null);
+
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      <Layout>
-        <Router>
+      <Router>
+        <Layout>
           <Switch>
             <Route path="/signin">
               <SignIn />
@@ -24,30 +18,19 @@ export const App = () => {
             <Route path="/signup">
               <SignUp />
             </Route>
-            <ProtectedRoute
-              path="/profile"
-              isAuthenticated={!!user}
-              component={
-                <>
-                  <Header />
-                  <Profile />
-                </>
-              }
-            ></ProtectedRoute>
-            <ProtectedRoute
-              path="/"
-              exact
-              isAuthenticated={!!user}
-              component={
-                <>
-                  <Header />
-                  <Home />
-                </>
-              }
-            ></ProtectedRoute>
+            <Route path="/profile">
+              <>
+                <Profile />
+              </>
+            </Route>
+            <Route path="/" exact>
+              <>
+                <Home />
+              </>
+            </Route>
           </Switch>
-        </Router>
-      </Layout>
+        </Layout>
+      </Router>
     </UserContext.Provider>
   );
 };

@@ -63,7 +63,7 @@ export function SignUp({ toogleForm }) {
       borderRadius="8px"
       onSubmit={handleSubmit}
     >
-      <Text>Welcome to Coderhood!</Text>
+      <Text>Welcome to Coderhood! 😊</Text>
       <Heading mb="2rem">Signup</Heading>
       <Input
         onChange={handleFirstNameChange}

@@ -2,11 +2,13 @@ import React from "react";
 import { Flex, Button, Avatar, Text } from "@chakra-ui/react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import { UserContext } from "../context/user";
+import { useAuth } from "../hooks";
 
 export const Header = () => {
   const history = useHistory();
   const { user } = React.useContext(UserContext);
-  console.log("userContextData", user);
+  const { users } = useAuth();
+  console.log(`users header: ${JSON.stringify(users, null, 2)}`);
 
   const name = user && `${user.firstName} ${user.lastName}`;
 
